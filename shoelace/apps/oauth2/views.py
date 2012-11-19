@@ -1,10 +1,9 @@
-#-*- coding: utf-8 -*-
+#-*- codng: utf-8 -*-
 
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
-from uni_form.helpers import FormHelper, Submit, Reset
 from django.contrib.auth.decorators import login_required
 from oauth2app.authorize import Authorizer, MissingRedirectURI, AuthorizationException
 from oauth2app.authorize import UnvalidatedRequest, UnauthenticatedUser
@@ -12,9 +11,9 @@ from .forms import AuthorizeForm
 
 
 @login_required
-def missing_redirect_uri(request):
+def missing_redirect(request):
     return render_to_response(
-        'oauth2/missing_redirect_uri.html',
+        'oauth2/missing_redirect.html',
         {},
         RequestContext(request))
 
@@ -25,7 +24,7 @@ def authorize(request):
     try:
         authorizer.validate(request)
     except MissingRedirectURI, e:
-        return HttpResponseRedirect("/oauth2/missing_redirect_uri")
+        return HttpResponseRedirect("/oauth2/missing_redirect")  # XXX: Fix this
     except AuthorizationException, e:
         # The request is malformed or invalid. Automatically
         # redirects to the provided redirect URL.
@@ -37,18 +36,11 @@ def authorize(request):
             "client":authorizer.client,
             "access_ranges":authorizer.access_ranges}
         template["form"] = AuthorizeForm()
-        helper = FormHelper()
-        no_submit = Submit('connect','No')
-        helper.add_input(no_submit)
-        yes_submit = Submit('connect', 'Yes')
-        helper.add_input(yes_submit)
-        helper.form_action = '/oauth2/authorize?%s' % authorizer.query_string
-        helper.form_method = 'POST'
-        template["helper"] = helper
         return render_to_response(
             'oauth2/authorize.html',
             template,
-            RequestContext(request))
+            RequestContext(request)
+        )
     elif request.method == 'POST':
         form = AuthorizeForm(request.POST)
         if form.is_valid():

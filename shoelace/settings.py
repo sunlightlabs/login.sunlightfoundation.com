@@ -1,5 +1,9 @@
+import os
+
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+LOGIN_URL = "/account/login"
 
 ADMINS = (
     ('Paul Tagliamonte', 'paultag@sunlightfoundation.com'),
@@ -56,6 +60,7 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'shoelace.urls'
 
 TEMPLATE_DIRS = (
+    os.path.abspath("./templates")
 )
 
 INSTALLED_APPS = (
