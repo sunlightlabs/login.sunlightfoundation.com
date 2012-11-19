@@ -72,7 +72,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'shoelace.apps.oauth2',
     'oauth2app',
-    # 'django.contrib.admin',
+    'django.contrib.admin',
 )
 
 LOGGING = {
