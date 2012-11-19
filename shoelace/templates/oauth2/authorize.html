@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}Auth{% endblock %}
+
+{% block content %}
+<form method = 'post' action = '/oauth2/authorize' >
+    <input type = 'submit' name = 'connect' value = 'Yes' />
+    <input type = 'submit' name = 'connect' value = 'No' />
+    {% for key, value in GET.items %}
+    <input type = 'hidden' name = '{{key}}' value = '{{value}}' />
+    {% endfor %}
+    {% csrf_token %}
+</form>
+{% endblock %}

@@ -34,8 +34,8 @@ def authorize(request):
         # or access_ranges as otherwise they will be None.
         template = {
             "client":authorizer.client,
-            "access_ranges":authorizer.access_ranges}
-        template["form"] = AuthorizeForm()
+            "access_ranges":authorizer.access_ranges,
+            "GET": request.GET}
         return render_to_response(
             'oauth2/authorize.html',
             template,
