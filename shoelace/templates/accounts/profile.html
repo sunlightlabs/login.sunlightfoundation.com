@@ -3,6 +3,9 @@
 {% block title %}profile{% endblock %}
 
 {% block content %}
+<h1>Hi, {{user.first_name}}!</h1>
+<p>It's a damn file pleasure to meet you.</p>
+
 {% if clients %}
 <h3>Owned Client Keys</h3>
 <table class="table table-bordered table-striped" >

@@ -8,10 +8,17 @@
         <p>Welcome to Shoelace. Shoelace is a self-contained OAuth2 provider,
         written in Python.</p>
         <p>
+{% if user.is_authenticated %}
+            <a
+                href="/accounts/profile"
+                class="btn btn-primary btn-large"
+            >Your Profile &raquo;</a>
+{% else %}
             <a
                 href="/accounts/login"
                 class="btn btn-primary btn-large"
             >Log in &raquo;</a>
+{% endif %}
         </p> {# XXX: use {% url 'login' %} when it works ... #}
     </div>
 {% endblock %}
