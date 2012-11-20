@@ -7,8 +7,6 @@ urlpatterns = patterns('',
     (r'^oauth2/',   include('shoelace.apps.oauth2.urls')),
     (r'^api/',      include('shoelace.apps.api.urls')),
     (r'^accounts/', include('shoelace.apps.accounts.urls')),
-
-    # Uncomment the next line to enable the admin:
-    url(r'^admin/', include(admin.site.urls)),
+    (r'^admin/', include(admin.site.urls)),
 )
 
