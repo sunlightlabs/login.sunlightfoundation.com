@@ -1,4 +1,4 @@
 Django>=1.4
--e git://github.com/hiidef/oauth2app.git#egg=oauth2app
+-e git://github.com/paultag/oauth2app.git#egg=oauth2app
 humanize
 flake8
