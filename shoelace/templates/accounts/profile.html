@@ -4,7 +4,8 @@
 
 {% block content %}
 {% if clients %}
-<table class = 'zebra' >
+<h3>Owned Client Keys</h3>
+<table class="table table-bordered table-striped" >
     <tr>
         <th>Client Name</th>
         <th>Client Key</th>
@@ -18,7 +19,5 @@
     </tr>
     {% endfor %}
 </table>
-{% else %}
-    Sorry, no clients.
 {% endif %}
 {% endblock %}
