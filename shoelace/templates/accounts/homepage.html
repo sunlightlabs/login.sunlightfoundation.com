@@ -3,6 +3,15 @@
 {% block title %}Shoelace{% endblock %}
 
 {% block content %}
-    Hi there! Welcome to Shoelace.
-    <a href = '/accounts/login' >Login</a>
+    <div class="hero-unit">
+        <h1>Hello, world! <small></small></h1>
+        <p>Welcome to Shoelace. Shoelace is a self-contained OAuth2 provider,
+        written in Python.</p>
+        <p>
+            <a
+                href="/accounts/login"
+                class="btn btn-primary btn-large"
+            >Log in &raquo;</a>
+        </p> {# XXX: use {% url 'login' %} when it works ... #}
+    </div>
 {% endblock %}
