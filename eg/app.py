@@ -19,16 +19,21 @@ TOKEN_URL = '%s/token' % (AUTH_BASE)
 CLIENT_ID = '3aa23807530031a618987d4ba6033e'
 CLIENT_KEY = 'cef4a23ca68e61dbc6e5d1bf7b381c'
 
-SCOPE = ()
+SCOPE = ('all',)
 
-shoelace = Client(
-    auth_endpoint=AUTH_URL,
-    token_endpoint=TOKEN_URL,
-    resource_endpoint=API_BASE,
-    redirect_uri=REDIRECT_URL,
-    client_id=CLIENT_ID,
-    client_secret=CLIENT_KEY
-)
+def shoe(refresh_token=None):
+    c = Client(
+        auth_endpoint=AUTH_URL,
+        token_endpoint=TOKEN_URL,
+        resource_endpoint=API_BASE,
+        redirect_uri=REDIRECT_URL,
+        client_id=CLIENT_ID,
+        client_secret=CLIENT_KEY
+    )
+    if refresh_token:
+        c.request_token(refresh_token)
+    return c
+
 
 app = Flask(__name__)
 app.secret_key = 'foo bar baz'
@@ -41,42 +46,32 @@ def index():
 
 @app.route("/login")
 def login():
-    return redirect(shoelace.auth_uri(SCOPE))
+    return redirect(shoe().auth_uri(SCOPE))
 
 
 @app.route("/recv")
 def recv():
-    c = shoelace
-    params = {}
-    for arg in request.args:
-        params[arg] = request.args[arg]
-    c.request_token(**params)
-    rc = Client(
-        token_endpoint=c.token_endpoint,
-        client_id=c.client_id,
-        client_secret=c.client_secret,
-        resource_endpoint=c.resource_endpoint
-    )
+    if 'code' in request.args:
+        c = shoe()
+        params = {}
+        for arg in request.args:
+            params[arg] = request.args[arg]
+        c.request_token(**params)
 
-    rc.request_token(
-        grant_type="refresh_token",
-        refresh_token=c.refresh_token
-    )
+        session['refresh_token'] = c.refresh_token
+        session['code'] = params['code']
 
-    session['refresh_token'] = rc.refresh_token
-    session['code'] = params['code']
-
-    return redirect('/info')
+        return redirect('/info')
+    return ""
 
 
 @app.route("/info")
 def info():
-    c = shoelace
+    c = shoe()
     c.request_token(
-        grant_type="refresh_token",
+        grant_type='refresh_token',
         refresh_token=session['refresh_token']
     )
-
     email = c.request('/email')
     return str(email)
 
