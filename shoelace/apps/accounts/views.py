@@ -13,9 +13,12 @@ def profile(request):
         'accounts/profile.html',
         {
             "clients": Client.objects.filter(user=user),
-            "codes": Code.objects.filter(user=user).select_related(),
+
+            "codes": Code.objects.filter(
+                user=user).order_by('-expire').select_related(),
+
             "access_tokens": AccessToken.objects.filter(
-                user=user).select_related()
+                user=user).order_by('-expire').select_related()
         },
         RequestContext(request)
     )

@@ -71,7 +71,13 @@ def recv():
 
 @app.route("/info")
 def info():
-    email = shoelace.request('/email')
+    c = shoelace
+    c.request_token(
+        grant_type="refresh_token",
+        refresh_token=session['refresh_token']
+    )
+
+    email = c.request('/email')
     return str(email)
 
 
