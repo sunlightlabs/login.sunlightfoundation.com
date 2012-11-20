@@ -33,9 +33,10 @@ def authorize(request):
         # Make sure the authorizer has validated before requesting the client
         # or access_ranges as otherwise they will be None.
         template = {
-            "client":authorizer.client,
-            "access_ranges":authorizer.access_ranges,
-            "GET": request.GET}
+            "client": authorizer.client,
+            "access_ranges": authorizer.access_ranges,
+            "GET": request.GET
+        }
         return render_to_response(
             'oauth2/authorize.html',
             template,

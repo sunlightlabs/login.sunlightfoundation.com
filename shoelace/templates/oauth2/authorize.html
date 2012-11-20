@@ -5,8 +5,8 @@
 {% block content %}
     <div class="hero-unit">
         <h1>Requesting Authentication <small></small></h1>
-        <p><i>name</i> is requesting something or other. Should I give
-        it your deets?</p>
+        <p><i>{{client.name}}</i> is requesting access to your data.
+        Should I give it your deets?</p>
         <p>
         <form
             class="form-signin"
@@ -27,7 +27,7 @@
             >Yup!</button>
             {% csrf_token %}
             {% for key, value in GET.items %}
-            <input type = 'hidden' name = '{{key}}' value = '{{value}}' />
+                <input type = 'hidden' name = '{{key}}' value = '{{value}}' />
             {% endfor %}
             {% csrf_token %}
         </form>
