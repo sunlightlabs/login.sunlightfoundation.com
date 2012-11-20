@@ -3,7 +3,7 @@ import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-LOGIN_URL = "/account/login"
+LOGIN_URL = "/accounts/login"
 
 ADMINS = (
     ('Paul Tagliamonte', 'paultag@sunlightfoundation.com'),

@@ -8,4 +8,6 @@ urlpatterns = patterns('',
             'template_name': 'accounts/login.html'
         }
     ),
+    (r'^profile/$', 'shoelace.apps.accounts.views.profile'),
+
 )

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}profile{% endblock %}
+
+{% block content %}
+{% if clients %}
+<table class = 'zebra' >
+    <tr>
+        <th>Client Name</th>
+        <th>Client Key</th>
+        <th>Client Secret</th>
+    </tr>
+    {% for client in clients %}
+    <tr>
+        <td>{{client.name}}</td>
+        <td>{{client.key}}</td>
+        <td>{{client.secret}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% else %}
+    Sorry, no clients.
+{% endif %}
+{% endblock %}
