@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load account_tags %}
+
 
 {% block title %}profile{% endblock %}
 
@@ -23,4 +25,41 @@
     {% endfor %}
 </table>
 {% endif %}
+
+{% if codes %}
+<h3>Issued codes</h3>
+<table class="table table-bordered table-striped" >
+    <tr>
+        <th>Client</th>
+        <th>Issued</th>
+        <th>Expire</th>
+    </tr>
+    {% for code in codes %}
+    <tr>
+        <td>{{code.client.name}}</td>
+        <td>{{code.issue|hp}}</td>
+        <td>{{code.expire|hp}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+{% if access_tokens %}
+<h3>Issued access tokens</h3>
+<table class="table table-bordered table-striped" >
+    <tr>
+        <th>Client</th>
+        <th>Issued</th>
+        <th>Expire</th>
+    </tr>
+    {% for token in access_tokens %}
+    <tr>
+        <td>{{token.client.name}}</td>
+        <td>{{token.issue|hp}}</td>
+        <td>{{token.expire|hp}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
 {% endblock %}
