@@ -31,6 +31,7 @@ shoelace = Client(
 )
 
 app = Flask(__name__)
+app.secret_key = 'foo bar baz'
 
 
 @app.route("/login")
@@ -40,10 +41,22 @@ def login():
 
 @app.route("/recv")
 def recv():
+    c = shoelace
     params = {}
     for arg in request.args:
         params[arg] = request.args[arg]
-        shoelace.request_token(**params)
+    c.request_token(**params)
+    rc = Client(token_endpoint=c.token_endpoint,
+        client_id=c.client_id,
+        client_secret=c.client_secret,
+        resource_endpoint=c.resource_endpoint)
+
+    rc.request_token(grant_type="refresh_token",
+        refresh_token=c.refresh_token)
+
+    session['refresh_token'] = rc.refresh_token
+    session['code'] = params['code']
+
     return redirect('/info')
 
 
