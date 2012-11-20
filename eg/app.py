@@ -34,6 +34,11 @@ app = Flask(__name__)
 app.secret_key = 'foo bar baz'
 
 
+@app.route("/")
+def index():
+    return redirect("/login")
+
+
 @app.route("/login")
 def login():
     return redirect(shoelace.auth_uri(SCOPE))

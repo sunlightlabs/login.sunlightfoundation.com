@@ -19,4 +19,7 @@ def profile(request):
 
 
 def homepage(request):
-    return render_to_response('accounts/homepage.html')
+    return render_to_response(
+        'accounts/homepage.html',
+        RequestContext(request)
+    )
