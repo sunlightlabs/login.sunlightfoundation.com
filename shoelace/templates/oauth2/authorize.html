@@ -3,12 +3,34 @@
 {% block title %}Auth{% endblock %}
 
 {% block content %}
-<form method = 'post' action = '/oauth2/authorize' >
-    <input type = 'submit' name = 'connect' value = 'Yes' />
-    <input type = 'submit' name = 'connect' value = 'No' />
-    {% for key, value in GET.items %}
-    <input type = 'hidden' name = '{{key}}' value = '{{value}}' />
-    {% endfor %}
-    {% csrf_token %}
-</form>
+    <div class="hero-unit">
+        <h1>Requesting Authentication <small></small></h1>
+        <p><i>name</i> is requesting something or other. Should I give
+        it your deets?</p>
+        <p>
+        <form
+            class="form-signin"
+            method="post"
+            action="/oauth2/authorize"
+        >
+            <button
+                name="connect"
+                value="No"
+                class="btn btn-danger"
+                type="submit"
+            >No way</button>
+            <button
+                name="connect"
+                value="Yes"
+                class="btn btn-primary"
+                type="submit"
+            >Yup!</button>
+            {% csrf_token %}
+            {% for key, value in GET.items %}
+            <input type = 'hidden' name = '{{key}}' value = '{{value}}' />
+            {% endfor %}
+            {% csrf_token %}
+        </form>
+        </p>
+    </div>
 {% endblock %}
