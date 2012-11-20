@@ -14,7 +14,8 @@ def profile(request):
         {
             "clients": Client.objects.filter(user=user),
             "codes": Code.objects.filter(user=user).select_related(),
-            "access_tokens": AccessToken.objects.filter(user=user).select_related()
+            "access_tokens": AccessToken.objects.filter(
+                user=user).select_related()
         },
         RequestContext(request)
     )

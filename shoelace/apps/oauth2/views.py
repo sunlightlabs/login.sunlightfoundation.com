@@ -5,8 +5,8 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from oauth2app.authorize import Authorizer, MissingRedirectURI, AuthorizationException
-from oauth2app.authorize import UnvalidatedRequest, UnauthenticatedUser
+from oauth2app.authorize import (Authorizer, MissingRedirectURI,
+                                 AuthorizationException)
 from .forms import AuthorizeForm
 
 
@@ -23,9 +23,9 @@ def authorize(request):
     authorizer = Authorizer()
     try:
         authorizer.validate(request)
-    except MissingRedirectURI, e:
-        return HttpResponseRedirect("/oauth2/missing_redirect")  # XXX: Fix this
-    except AuthorizationException, e:
+    except MissingRedirectURI:
+        return HttpResponseRedirect("/oauth2/missing_redirect")  # XXX: Fix.
+    except AuthorizationException:
         # The request is malformed or invalid. Automatically
         # redirects to the provided redirect URL.
         return authorizer.error_redirect()

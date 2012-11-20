@@ -2,7 +2,7 @@
 # and conditions of the Expat license, a copy of which should be given to you
 # with the source of this application.
 
-from flask import Flask, render_template, abort, redirect, session, request
+from flask import Flask, redirect, session, request
 from sanction.client import Client
 
 
@@ -51,13 +51,17 @@ def recv():
     for arg in request.args:
         params[arg] = request.args[arg]
     c.request_token(**params)
-    rc = Client(token_endpoint=c.token_endpoint,
+    rc = Client(
+        token_endpoint=c.token_endpoint,
         client_id=c.client_id,
         client_secret=c.client_secret,
-        resource_endpoint=c.resource_endpoint)
+        resource_endpoint=c.resource_endpoint
+    )
 
-    rc.request_token(grant_type="refresh_token",
-        refresh_token=c.refresh_token)
+    rc.request_token(
+        grant_type="refresh_token",
+        refresh_token=c.refresh_token
+    )
 
     session['refresh_token'] = rc.refresh_token
     session['code'] = params['code']
