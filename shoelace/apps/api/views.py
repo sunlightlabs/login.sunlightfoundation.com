@@ -10,4 +10,7 @@ def email(request):
         authenticator.validate(request)
     except AuthenticationException:
         return authenticator.error_response()
-    return authenticator.response({"email":authenticator.user.email})
+
+    return authenticator.response({
+        "email": authenticator.user.email
+    })
