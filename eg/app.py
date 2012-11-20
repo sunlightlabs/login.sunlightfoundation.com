@@ -2,7 +2,7 @@
 # and conditions of the Expat license, a copy of which should be given to you
 # with the source of this application.
 
-from flask import Flask, redirect, session, request
+from flask import Flask, redirect, session, request, render_template
 from sanction.client import Client
 
 
@@ -62,7 +62,7 @@ def recv():
         session['code'] = params['code']
 
         return redirect('/info')
-    return ""
+    return render_template('error.html', args=request.args)
 
 
 @app.route("/info")
