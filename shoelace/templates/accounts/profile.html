@@ -33,12 +33,18 @@
         <th>Client</th>
         <th>Issued</th>
         <th>Expire</th>
+        <th>Scope</th>
     </tr>
     {% for token in access_tokens %}
     <tr>
         <td>{{token.client.name}}</td>
         <td>{{token.issue|hp}}</td>
         <td>{{token.expire|hp}}</td>
+        <td>
+{% for scope in token.scope.all %}
+            <span class="badge badge-info" >{{scope.key}}</span>
+{% endfor %}
+        </td>
     </tr>
     {% endfor %}
 </table>
