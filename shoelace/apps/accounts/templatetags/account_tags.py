@@ -7,7 +7,7 @@ register = template.Library()
 
 def human_posix(posix):
     posix = int(posix)
-    d = dt.date.fromtimestamp(posix)
+    d = dt.datetime.fromtimestamp(posix)
     return humanize.naturaltime(d)
 
 register.filter('human_posix', human_posix)
