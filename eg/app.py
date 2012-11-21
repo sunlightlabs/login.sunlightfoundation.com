@@ -16,8 +16,8 @@ API_BASE = '%s/api' % (BASE)
 AUTH_URL = '%s/authorize' % (AUTH_BASE)
 TOKEN_URL = '%s/token' % (AUTH_BASE)
 
-CLIENT_ID = '3aa23807530031a618987d4ba6033e'
-CLIENT_KEY = 'cef4a23ca68e61dbc6e5d1bf7b381c'
+CLIENT_ID = '450cd1a10f9163f2fd2bb90410f1a1'
+CLIENT_KEY = 'fdb7ad0d1465d524fa941239392d7d'
 
 SCOPE = ('all',)
 
