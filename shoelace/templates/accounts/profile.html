@@ -26,6 +26,22 @@
 </table>
 {% endif %}
 
+
+{% if authed_apps %}
+<h3>Authorized Apps</h3>
+<table class="table table-bordered table-striped" >
+    <tr>
+        <th>App Name</th>
+    </tr>
+    {% for app in authed_apps %}
+    <tr>
+        <td>{{app.name}}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endif %}
+
+{% comment %}
 {% if access_tokens %}
 <h3>Issued access tokens</h3>
 <table class="table table-bordered table-striped" >
@@ -49,7 +65,6 @@
     {% endfor %}
 </table>
 {% endif %}
-
 {% if codes %}
 <h3>Issued codes</h3>
 <table class="table table-bordered table-striped" >
@@ -67,5 +82,6 @@
     {% endfor %}
 </table>
 {% endif %}
+{% endcomment %}
 
 {% endblock %}
