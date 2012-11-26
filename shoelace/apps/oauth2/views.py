@@ -5,7 +5,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
-from oauth2app.lib.auth_helpers import get_authorized_clients
+from oauth2app.authorize import get_authorized_clients
 from oauth2app.authorize import (Authorizer, MissingRedirectURI,
                                  AuthorizationException)
 from .forms import AuthorizeForm
