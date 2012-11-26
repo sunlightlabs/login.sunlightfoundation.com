@@ -16,22 +16,26 @@ API_BASE = '%s/api' % (BASE)
 AUTH_URL = '%s/authorize' % (AUTH_BASE)
 TOKEN_URL = '%s/token' % (AUTH_BASE)
 
-CLIENT_ID = '450cd1a10f9163f2fd2bb90410f1a1'
-CLIENT_KEY = 'fdb7ad0d1465d524fa941239392d7d'
+CLIENT_ID = '774e87cb9e65bc3a040d1e5f87534a'
+CLIENT_KEY = '441c0a3d5ccb0f988dac5605ba6614'
 
 SCOPE = ('all',)
 
-def shoe(refresh_token=None):
-    c = Client(
-        auth_endpoint=AUTH_URL,
-        token_endpoint=TOKEN_URL,
-        resource_endpoint=API_BASE,
-        redirect_uri=REDIRECT_URL,
-        client_id=CLIENT_ID,
-        client_secret=CLIENT_KEY
-    )
-    if refresh_token:
-        c.request_token(refresh_token)
+def shoe():
+    if 'shoe_client' in session:
+        c = session['shoe_client']
+    else:
+        c = Client(
+            auth_endpoint=AUTH_URL,
+            token_endpoint=TOKEN_URL,
+            resource_endpoint=API_BASE,
+            redirect_uri=REDIRECT_URL,
+            client_id=CLIENT_ID,
+            client_secret=CLIENT_KEY
+        )
+
+    c.request_token(grant_type="refresh_token", refresh_token=c.refresh_token)
+    session['shoe_client'] = c
     return c
 
 
@@ -56,10 +60,9 @@ def recv():
         params = {}
         for arg in request.args:
             params[arg] = request.args[arg]
-        c.request_token(**params)
 
-        session['refresh_token'] = c.refresh_token
-        session['code'] = params['code']
+        c.request_token(**params)
+        session['shoe_client'] = c
 
         return redirect('/info')
     return render_template('error.html', args=request.args)
@@ -68,10 +71,6 @@ def recv():
 @app.route("/info")
 def info():
     c = shoe()
-    c.request_token(
-        grant_type='refresh_token',
-        refresh_token=session['refresh_token']
-    )
     email = c.request('/email')
     return str(email)
 
