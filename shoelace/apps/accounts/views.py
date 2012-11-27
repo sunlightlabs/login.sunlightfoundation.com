@@ -11,19 +11,32 @@ from oauth2app.authorize import get_authorized_clients
 @login_required
 def profile(request):
     user = request.user
+    authed = []
+
+    for client in get_authorized_clients(user):
+        token = AccessToken.objects.filter(
+            user=user,
+            client=client
+        ).order_by('-expire').select_related()[0]
+
+        authed.append({
+            "client": client,
+            "last_token": token
+        })
+
     return render_to_response(
-        'accounts/profile.html',
-        {
+        'accounts/profile.html', {
             "clients": Client.objects.filter(user=user),
+            "authed_apps": authed
 
-            "codes": Code.objects.filter(
-                user=user).order_by('-expire').select_related(),
+#             "codes": Code.objects.filter(
+#                 user=user
+#             ).order_by('-expire').select_related(),
+#             "tokens": AccessToken.objects.filter(
+#                 user=user
+#             ).order_by('-expire').select_related(),
 
-            "access_tokens": AccessToken.objects.filter(
-                user=user).order_by('-expire').select_related(),
-            "authed_apps": get_authorized_clients(user)
-        },
-        RequestContext(request)
+        }, RequestContext(request)
     )
 
 
