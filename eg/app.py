@@ -4,6 +4,7 @@
 
 from flask import Flask, redirect, session, request, render_template
 from sanction.client import Client
+from urllib2 import HTTPError
 
 
 BASE = 'http://localhost:8000'
@@ -54,7 +55,11 @@ def index():
 
 @app.route("/login")
 def login():
-    return redirect(shoe().auth_uri(SCOPE))
+    try:
+        return redirect(shoe().auth_uri(SCOPE))
+    except HTTPError:  # Stale something or other. Just kick it.
+        session.pop('shoe_client')
+        return redirect("/login")
 
 
 @app.route("/recv")
