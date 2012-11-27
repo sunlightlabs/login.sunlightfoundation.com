@@ -34,7 +34,11 @@ def shoe():
             client_secret=CLIENT_KEY
         )
 
-    c.request_token(grant_type="refresh_token", refresh_token=c.refresh_token)
+    if hasattr(c, 'refresh_token'):
+        c.request_token(grant_type="refresh_token",
+                        refresh_token=c.refresh_token)
+        # XXX: Refactor this to be only when we're expired or something.
+
     session['shoe_client'] = c
     return c
 

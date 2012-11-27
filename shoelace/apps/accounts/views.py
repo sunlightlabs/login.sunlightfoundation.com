@@ -1,6 +1,7 @@
 #-*- codng: utf-8 -*-
 
-from django.shortcuts import render_to_response
+from django.core.urlresolvers import reverse
+from django.shortcuts import render_to_response, redirect
 from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
 from oauth2app.models import Client, Code, AccessToken
@@ -31,3 +32,10 @@ def homepage(request):
         'accounts/homepage.html',
         RequestContext(request)
     )
+
+
+def revoke(request, app_id):
+    client = Client.objects.filter(id=app_id)[0]  # XXX: Saner error.
+    tokens = AccessToken.objects.filter(client=client)
+    [t.delete() for t in tokens]
+    return redirect(reverse('profile'))

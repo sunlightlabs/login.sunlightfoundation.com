@@ -15,6 +15,14 @@ urlpatterns = patterns('',
             'template_name': 'accounts/logout.html'
         },
     ),
-    url(r'^profile/$', 'shoelace.apps.accounts.views.profile')
-
+    url(
+        r'^profile/$',
+        'shoelace.apps.accounts.views.profile',
+        name='profile'
+    ),
+    url(
+        r'^revoke/(?P<app_id>.*)/$',
+        'shoelace.apps.accounts.views.revoke',
+        name='revoke'
+    )
 )
