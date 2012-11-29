@@ -24,5 +24,10 @@ urlpatterns = patterns('',
         r'^revoke/(?P<app_id>.*)/$',
         'shoelace.apps.accounts.views.revoke',
         name='revoke'
+    ),
+    url(
+        r'^signup/$',
+        'shoelace.apps.accounts.views.signup',
+        name='signup'
     )
 )
