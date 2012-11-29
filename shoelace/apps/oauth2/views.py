@@ -4,6 +4,7 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
 from django.template import RequestContext
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from oauth2app.authorize import get_authorized_clients
 from oauth2app.authorize import (Authorizer, MissingRedirectURI,
@@ -33,10 +34,15 @@ def authorize(request):
     if request.method == 'GET':
         # Make sure the authorizer has validated before requesting the client
         # or access_ranges as otherwise they will be None.
-        if authorizer.client.id in [
-            x.id for x in get_authorized_clients(request.user)
-        ]:
-            return authorizer.grant_redirect()
+        if settings.SHOELACE_QUERY_AUTH_ALWAYS:
+                return authorizer.grant_redirect()
+
+
+        if settings.SHOELACE_QUERY_AUTH_FIRST_LOGIN:
+            if authorizer.client.id in [
+                x.id for x in get_authorized_clients(request.user)
+            ]:
+                return authorizer.grant_redirect()
 
         template = {
             "client": authorizer.client,
