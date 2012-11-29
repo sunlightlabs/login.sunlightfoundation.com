@@ -58,6 +58,10 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
 )
 
+AUTHENTICATION_BACKENDS = (
+    'shoelace.apps.accounts.backends.EmailBackend',
+)
+
 ROOT_URLCONF = 'shoelace.urls'
 
 TEMPLATE_DIRS = (
