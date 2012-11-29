@@ -80,7 +80,7 @@ def recv():
 @app.route("/info")
 def info():
     c = shoe()
-    email = c.request('/email')
+    email = c.request('/userinfo')
     return str(email)
 
 

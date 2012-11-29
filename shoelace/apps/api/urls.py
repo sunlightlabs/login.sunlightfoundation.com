@@ -2,5 +2,5 @@
 from django.conf.urls.defaults import patterns, url
 
 urlpatterns = patterns('shoelace.apps.api.views',
-    url(r'^email/?$', 'email')
+    url(r'^userinfo/?$', 'userinfo')
 )
