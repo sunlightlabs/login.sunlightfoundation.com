@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% load account_tags %}
+{% load humanize %}
 
 
 {% block title %}profile{% endblock %}
@@ -38,7 +38,7 @@
     {% for app in authed_apps %}
     <tr>
         <td>{{app.client.name}}</td>
-        <td>{{app.last_token.issue|hp}}</td>
+        <td>{{app.last_token.issue|naturaltime}}</td>
         <td><a href = '/accounts/revoke/{{app.client.id}}/' >revoke</a></td>
     </tr>
     {% endfor %}
@@ -57,8 +57,8 @@
     {% for token in access_tokens %}
     <tr>
         <td>{{token.client.name}}</td>
-        <td>{{token.issue|hp}}</td>
-        <td>{{token.expire|hp}}</td>
+        <td>{{token.issue|naturaltime}}</td>
+        <td>{{token.expire|naturaltime}}</td>
         <td>
 {% for scope in token.scope.all %}
             <span class="badge badge-info" >{{scope.key}}</span>
@@ -79,8 +79,8 @@
     {% for code in codes %}
     <tr>
         <td>{{code.client.name}}</td>
-        <td>{{code.issue|hp}}</td>
-        <td>{{code.expire|hp}}</td>
+        <td>{{code.issue|naturaltime}}</td>
+        <td>{{code.expire|naturaltime}}</td>
     </tr>
     {% endfor %}
 </table>

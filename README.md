@@ -1,3 +1,9 @@
+Installation
+============
+
+    * create a local_settings.py with a SECRET_KEY in it
+    * ./manage.py syncdb
+
 Shoelace
 ========
 
