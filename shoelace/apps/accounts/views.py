@@ -8,6 +8,7 @@ from oauth2app.models import Client, Code, AccessToken
 from oauth2app.authorize import get_authorized_clients
 from shoelace.apps.accounts.forms import SignupForm
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 
 @login_required
@@ -70,11 +71,15 @@ def signup(request):
                 form.cleaned_data['password'],
             )
 
-            u.first_name = form.cleaned_data['first_name'],
+            u.first_name = form.cleaned_data['first_name']
             u.last_name = form.cleaned_data['last_name']
 
-            u.is_active = False
             u.save()
+
+            # log the user in by default
+            new_user = authenticate(username=form.cleaned_data['email'],
+                                    password=form.cleaned_data['password'])
+            login(request, new_user)
 
             return redirect(reverse('profile'))
     else:
