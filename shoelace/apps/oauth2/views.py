@@ -35,7 +35,7 @@ def authorize(request):
         # Make sure the authorizer has validated before requesting the client
         # or access_ranges as otherwise they will be None.
         if settings.SHOELACE_QUERY_AUTH_ALWAYS:
-                return authorizer.grant_redirect()
+            return authorizer.grant_redirect()
 
 
         if settings.SHOELACE_QUERY_AUTH_FIRST_LOGIN:
