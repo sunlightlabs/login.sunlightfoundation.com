@@ -47,7 +47,7 @@ def authorize(request):
                 return authorizer.grant_redirect()
 
         profile = ClientProfile.objects.filter(client=authorizer.client)
-        profile = None if profile == [] else profile[0]
+        profile = None if len(profile) <= 0 else profile[0]
 
         template = {
             "client": authorizer.client,
