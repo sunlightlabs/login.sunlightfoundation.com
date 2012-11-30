@@ -1,5 +1,7 @@
 #-*- codng: utf-8 -*-
 
+from shoelace.apps.oauth2.models import ClientProfile
+
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -44,10 +46,14 @@ def authorize(request):
             ]:
                 return authorizer.grant_redirect()
 
+        profile = ClientProfile.objects.filter(client=authorizer.client)
+        profile = None if profile == [] else profile[0]
+
         template = {
             "client": authorizer.client,
             "access_ranges": authorizer.access_ranges,
-            "GET": request.GET
+            "GET": request.GET,
+            "profile": profile
         }
         return render_to_response(
             'oauth2/authorize.html',

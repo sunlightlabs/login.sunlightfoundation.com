@@ -6,6 +6,11 @@
     <div class="hero-unit">
         <h1>{{client.name}}</h1>
         <p>{{client.description}}</p>
+        <p>
+        {% if profile %}
+            <img src="{{profile.image_url}}" alt="{{client.name}}" />
+        {% endif %}
+        </p>
         <p><i>{{client.name}}</i> is requesting access to your data.
         Should I give it your deets?</p>
         <p>
