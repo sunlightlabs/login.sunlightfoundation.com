@@ -11,6 +11,7 @@
 
 <h2>Login</h2>
 <form method="POST" action="." class="form-horizontal">
+<input type="hidden" name="next" value="{{next}}">
 {% include "accounts/_form.html" %}
 <div class="control-group">
     <div class="controls">

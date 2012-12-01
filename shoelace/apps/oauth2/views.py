@@ -28,7 +28,7 @@ def authorize(request):
     try:
         authorizer.validate(request)
     except MissingRedirectURI:
-        return HttpResponseRedirect("/oauth2/missing_redirect")  # XXX: Fix.
+        return HttpResponseRedirect("/oauth2/missing_redirect/")  # XXX: Fix.
     except AuthorizationException:
         # The request is malformed or invalid. Automatically
         # redirects to the provided redirect URL.
@@ -38,7 +38,6 @@ def authorize(request):
         # or access_ranges as otherwise they will be None.
         if settings.SHOELACE_QUERY_AUTH_ALWAYS:
             return authorizer.grant_redirect()
-
 
         if settings.SHOELACE_QUERY_AUTH_FIRST_LOGIN:
             if authorizer.client.id in [
