@@ -1,5 +1,7 @@
 #-*- codng: utf-8 -*-
 
+from shoelace.apps.oauth2.models import ClientProfile
+
 
 from django.shortcuts import render_to_response
 from django.http import HttpResponseRedirect
@@ -35,7 +37,7 @@ def authorize(request):
         # Make sure the authorizer has validated before requesting the client
         # or access_ranges as otherwise they will be None.
         if settings.SHOELACE_QUERY_AUTH_ALWAYS:
-                return authorizer.grant_redirect()
+            return authorizer.grant_redirect()
 
 
         if settings.SHOELACE_QUERY_AUTH_FIRST_LOGIN:
@@ -44,10 +46,14 @@ def authorize(request):
             ]:
                 return authorizer.grant_redirect()
 
+        profile = ClientProfile.objects.filter(client=authorizer.client)
+        profile = None if len(profile) <= 0 else profile[0]
+
         template = {
             "client": authorizer.client,
             "access_ranges": authorizer.access_ranges,
-            "GET": request.GET
+            "GET": request.GET,
+            "profile": profile
         }
         return render_to_response(
             'oauth2/authorize.html',

@@ -5,37 +5,19 @@
         <link rel="stylesheet" href="{{STATIC_URL}}css/login.css">
 {% endblock %}
 
-{% block title %}
-Login
-{% endblock %}
+{% block title %} Login {% endblock %}
 
 {% block content %}
-{% if form.errors %}
-    <p>Your username and password didn't match. Please try again</p>
-{% endif %}
 
-<form
-    class="form-signin"
-    method="post"
-    action="{% url 'django.contrib.auth.views.login' %}"
->
-    <h2 class="form-signin-heading">Please sign in</h2>
-    <input
-        name="{{form.username.name}}"
-        type="text"
-        class="input-block-level"
-        placeholder="Username"
-    >
-    <input
-        name="{{form.password.name}}"
-        type="password"
-        class="input-block-level"
-        placeholder="Password"
-    >
-    <input type="hidden" name="next" value="{{next}}" />
-    <button class="btn btn-primary" type="submit">Sign in</button>
-    <a href="{% url 'signup' %}" class="btn" >New Account</a>
-    {% csrf_token %}
+<h2>Login</h2>
+<form method="POST" action="." class="form-horizontal">
+{% include "accounts/_form.html" %}
+<div class="control-group">
+    <div class="controls">
+        <button type="submit" class="btn">Login</button>
+        <a href="{% url 'signup' %}" class="btn" >New Account</a>
+        <a href="{% url 'password_reset' %}" class="btn" >Forgot Password?</a>
+    </div>
+</div>
 </form>
-
 {% endblock %}
