@@ -1,14 +1,15 @@
 #-*- codng: utf-8 -*-
 
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response, redirect
-from django.contrib.auth.decorators import login_required
 from django.template import RequestContext
-from oauth2app.models import Client, Code, AccessToken
+from django.utils.http import urlquote
 from oauth2app.authorize import get_authorized_clients
+from oauth2app.models import Client, Code, AccessToken
 from shoelace.apps.accounts.forms import SignupForm
-from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
 
 
 @login_required
@@ -81,12 +82,16 @@ def signup(request):
                                     password=form.cleaned_data['password'])
             login(request, new_user)
 
-            return redirect(reverse('profile'))
+            if not request.POST['next']:
+                return redirect(reverse('profile'))
+            else:
+                return redirect(request.POST['next'])
     else:
         form = SignupForm()
 
     return render_to_response(
         'accounts/signup.html', {
-            'form': form
+            'form': form,
+            'next': request.GET.get('next')
         }, RequestContext(request)
     )
