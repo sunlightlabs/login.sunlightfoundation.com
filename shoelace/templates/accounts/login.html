@@ -34,7 +34,7 @@ Login
     >
     <input type="hidden" name="next" value="{{next}}" />
     <button class="btn btn-primary" type="submit">Sign in</button>
-    <a href="/accounts/register" class="btn" >Register</a>
+    <a href="{% url 'signup' %}" class="btn" >New Account</a>
     {% csrf_token %}
 </form>
 

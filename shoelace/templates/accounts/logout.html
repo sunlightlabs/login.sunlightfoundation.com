@@ -9,19 +9,11 @@ Logout
 {% endblock %}
 
 {% block content %}
-{% if form.errors %}
-    <p>Your username and password didn't match. Please try again</p>
-{% endif %}
-
     <div class="hero-unit">
         <h1>Cheerio! <small>(but thanks for stopping by!)</small></h1>
         <p>Later, dude!</p>
         <p>
-            <a
-                href="/"
-                class="btn btn-primary btn-large"
-            >Back home &raquo;</a>
+            <a href="/" class="btn btn-primary btn-large">Back home &raquo;</a>
         </p>
     </div>
-
 {% endblock %}

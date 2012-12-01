@@ -1,0 +1,24 @@
+{{form.non_field_errors}}
+
+<form method="POST" action="." class="form-horizontal">
+    {% csrf_token %}
+    {% for field in form.hidden_fields %} {{hidden}} {% endfor %}
+    {% for field in form.visible_fields %}
+    <div class="control-group {% if field.errors %}error{% endif %}">
+        <label class="control-label" for="id_{{field.html_name}}">
+            {{field.label}}
+        </label>
+        <div class="controls">
+            {{field}}
+            {% for error in field.errors %}
+            <span class="help-inline">{{error}}</span>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn">{{submit}}</button>
+        </div>
+    </div>
+</form>
