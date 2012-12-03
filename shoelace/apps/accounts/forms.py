@@ -16,7 +16,7 @@ class SignupForm(forms.Form):
         try:
             User.objects.get(email=self.data['email'])
         except User.DoesNotExist:
-            return
+            return self.data['email']
         raise validators.ValidationError(
             'The email "%s" is already taken.' % (self.data['email'])
         )
