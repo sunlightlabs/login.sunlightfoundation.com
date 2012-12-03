@@ -4,7 +4,8 @@ urlpatterns = patterns('',
     # contrib.auth views
     url(
         r'^login/$',
-        'django.contrib.auth.views.login',
+#        'django.contrib.auth.views.login',
+        'shoelace.apps.accounts.views.login_shim',  # this calls the django view.
         { 'template_name': 'accounts/login.html' },
         name='login',
     ),

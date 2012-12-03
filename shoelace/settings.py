@@ -1,4 +1,6 @@
 import os
+from django.conf import settings
+
 
 SHOELACE_QUERY_AUTH_FIRST_LOGIN = False
 SHOELACE_QUERY_AUTH_ALWAYS = True
@@ -80,6 +82,17 @@ INSTALLED_APPS = (
     'shoelace.apps.accounts',
     'oauth2app',
     'django.contrib.admin'
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.core.context_processors.request",
+    "django.contrib.messages.context_processors.messages"
 )
 
 LOGGING = {

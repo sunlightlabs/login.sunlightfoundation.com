@@ -10,6 +10,9 @@
 {% block content %}
 
 <h2>Login</h2>
+{% if request.shoelace.client_profile %}
+    <img src="{{request.shoelace.client_profile.image_url}}" alt="" />
+{% endif %}
 <form method="POST" action="{% url 'login' %}?next={{next|urlencode}}" class="form-horizontal">
 <input type="hidden" name="next" value="{{next}}">
 {% include "accounts/_form.html" %}

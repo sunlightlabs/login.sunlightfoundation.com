@@ -10,6 +10,31 @@ from django.utils.http import urlquote
 from oauth2app.authorize import get_authorized_clients
 from oauth2app.models import Client, Code, AccessToken
 from shoelace.apps.accounts.forms import SignupForm
+from django.contrib.auth.views import login
+from urlparse import urlparse, parse_qs
+from shoelace.apps.oauth2.models import ClientProfile
+
+
+def login_shim(request, **kwargs):
+    request.shoelace = {
+        "client": None,
+        "client_profile": None
+    }
+    if 'next' in request.GET:
+        next_vals = urlparse(request.GET['next'])
+        if hasattr(next_vals, 'query'):
+            params = parse_qs(next_vals.query)
+            if 'client_id' in params and len(params['client_id']) > 0:
+                client_id = params['client_id'][0]  # Is this right?
+                try:
+                    client = Client.objects.get(key=client_id)
+                    request.shoelace['client'] = client
+                    client_profile = ClientProfile.objects.get(client=client)
+                    request.shoelace['client_profile'] = client_profile
+                except Client.DoesNotExist:
+                    pass
+
+    return login(request, **kwargs)
 
 
 @login_required
