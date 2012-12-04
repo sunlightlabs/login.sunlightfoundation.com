@@ -4,13 +4,7 @@ Installation
     * create a local_settings.py with a SECRET_KEY in it
     * ./manage.py syncdb
 
-Shoelace
-========
+    * Create a superuser (use your email for the username, please)
+    * add a Client, AccessRange (called something like `all`) & ClientProfile
 
-![](http://i.imgur.com/PQEh9.png)
-
-![](http://i.imgur.com/Il3CA.png)
-
-![](http://i.imgur.com/vOAkg.png)
-
-![](http://i.imgur.com/3gEfV.png)
+    Enjoy!
