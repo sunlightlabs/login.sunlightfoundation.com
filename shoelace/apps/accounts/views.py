@@ -11,6 +11,7 @@ from oauth2app.authorize import get_authorized_clients
 from oauth2app.models import Client, Code, AccessToken
 from shoelace.apps.accounts.forms import SignupForm
 from django.contrib.auth.views import login as login_view
+from django.contrib.auth.views import logout as logout_view
 from urlparse import urlparse, parse_qs
 from shoelace.apps.oauth2.models import ClientProfile
 
@@ -35,6 +36,14 @@ def login_shim(request, **kwargs):
                     pass
 
     return login_view(request, **kwargs)
+
+
+def logout_shim(request, **kwargs):
+    meta = request.META
+    if 'HTTP_REFERER' in meta:
+        pop_back = meta['HTTP_REFERER']
+    logout_view(request, **kwargs)
+    return redirect(pop_back)
 
 
 @login_required
