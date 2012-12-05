@@ -40,6 +40,7 @@ def login_shim(request, **kwargs):
 
 def logout_shim(request, **kwargs):
     meta = request.META
+    pop_back = "/"
     if 'HTTP_REFERER' in meta:
         pop_back = meta['HTTP_REFERER']
     logout_view(request, **kwargs)
