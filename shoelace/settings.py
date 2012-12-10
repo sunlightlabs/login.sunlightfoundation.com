@@ -12,6 +12,7 @@ LOGIN_URL = "/accounts/login"
 
 ADMINS = (
     ('Paul Tagliamonte', 'paultag@sunlightfoundation.com'),
+    ('James Turk', 'jturk@sunlightfoundation.com'),
 )
 
 MANAGERS = ADMINS
@@ -38,7 +39,7 @@ STATIC_ROOT = ''
 STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 STATICFILES_DIRS = (
-    os.path.abspath("./static"),
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "static"))
 )
 
 STATICFILES_FINDERS = (
@@ -67,7 +68,7 @@ AUTHENTICATION_BACKENDS = (
 ROOT_URLCONF = 'shoelace.urls'
 
 TEMPLATE_DIRS = (
-    os.path.abspath("./templates")
+    os.path.abspath(os.path.join(os.path.dirname(__file__), "templates"))
 )
 
 INSTALLED_APPS = (
