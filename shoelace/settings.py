@@ -64,7 +64,7 @@ AUTHENTICATION_BACKENDS = (
     'shoelace.apps.accounts.backends.EmailBackend',
 )
 
-ROOT_URLCONF = 'urls'
+ROOT_URLCONF = 'shoelace.urls'
 
 TEMPLATE_DIRS = (
     os.path.abspath("./templates")
