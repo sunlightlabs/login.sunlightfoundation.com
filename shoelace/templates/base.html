@@ -1,9 +1,10 @@
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{STATIC_URL}}css/shoelace.css">
-        <script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/shoelace.css' %}">
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
 {% block head %}
 {% endblock %}
         <title> {% block title %}{% endblock %} </title>
