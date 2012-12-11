@@ -83,6 +83,7 @@ INSTALLED_APPS = (
     'shoelace.apps.accounts',
     'oauth2app',
     'django.contrib.admin'
+    'storages',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -93,8 +94,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.core.context_processors.request",
-    "django.contrib.messages.context_processors.messages"
-    'storages',
+    "django.contrib.messages.context_processors.messages",
 )
 
 LOGGING = {
