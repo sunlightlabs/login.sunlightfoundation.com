@@ -7,3 +7,5 @@ django-storages==1.1.6
 boto==2.7.0
 
 -e git://github.com/sunlightlabs/sfapp.git@7fe2b0e1c163cadc4d5f338d8d04b582e61e2fe4#egg=sfapp
+django-storages
+# needed for sfapp, I think
