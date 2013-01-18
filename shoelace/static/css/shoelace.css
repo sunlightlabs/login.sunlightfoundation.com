@@ -7,3 +7,25 @@ copyright {
     color:              #AAAAAA;
     font-size:          0.8em;
 }
+.navbar-inner {
+	background: none;
+	border: 0;
+	box-shadow: none;
+	-webkit-box-shadow: none;
+	display: none;
+}
+.navbar .brand{
+	display: none;
+}
+.which-site {
+	margin-top: 66px;
+	margin-left: 0;
+}
+.which-site div{
+	text-align: center;
+	height: 84px;
+	display: table-cell;
+	padding: 0;
+	vertical-align: middle;
+	width: inherit;
+}
