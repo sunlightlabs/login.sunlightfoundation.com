@@ -1,34 +1,34 @@
-{% load static from staticfiles %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/shoelace.css' %}">
-        <script src="{% static 'js/bootstrap.min.js' %}"></script>
-{% block head %}
+{% extends "sfapp/base-full.html" %}
+{% load staticfiles %}
+
+{% block css %}
+	<link rel="stylesheet" href="{% static 'css/shoelace.css' %}">
 {% endblock %}
-        <title> {% block title %}{% endblock %} </title>
-    </head>
-    <body>
-    <div class="navbar">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="brand" href="/">shoelace</a>
-                <ul class="nav">
-                {% if user.is_authenticated %}
-                    <li><a href="{% url profile %}" >Profile</a></li>
-                    <li><a href="{% url logout %}" >Logout</a></li>
-                {% else %}
-                    <li><a href="/accounts/login" >Login</a></li>
-                {% endif %}
-                {% block navbar %}
-                {% endblock %}
-                </ul>
-            </div>
-        </div>
+
+{% block js %}
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+{% endblock %}
+
+{% block container %}
+	<div class="content">
+        <div class="navbar">
+	        <div class="navbar-inner">
+	            <div class="container">
+	                <a class="brand" href="/">shoelace</a>
+	                <ul class="nav">
+	                {% if user.is_authenticated %}
+	                    <li><a href="{% url profile %}">Profile</a></li>
+	                    <li><a href="{% url logout %}">Logout</a></li>
+	                {% else %}
+	                    <li><a href="/accounts/login">Login</a></li>
+	                {% endif %}
+	                {% block navbar %}{% endblock %}
+	                </ul>
+	            </div>
+	        </div>
+	    </div>
+	    <div class="container">
+	    	{% block content %}{% endblock %}
+	    </div>
     </div>
-    <div class="container">
-    {% block content %}{% endblock %}
-    </div>
-    </body>
-</html>
+{% endblock %}
