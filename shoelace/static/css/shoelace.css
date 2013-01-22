@@ -29,3 +29,19 @@ copyright {
 	vertical-align: middle;
 	width: inherit;
 }
+
+.sectionHeader{
+	border-bottom: 1px dashed #d6d3d2;
+	padding-bottom: 5px;
+	max-width: 100%;
+}
+.halfs li {
+	float: left;
+	padding-left: 40px;
+	width: 50%;
+	margin-bottom: 25px;
+	list-style-type: none;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
