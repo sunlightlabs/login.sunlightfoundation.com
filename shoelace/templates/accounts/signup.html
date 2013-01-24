@@ -18,7 +18,9 @@
 </div>
 <div class="span5 which-site">
 	<div class="">
-		<img src="https://scout.sunlightfoundation.com/images/logo_scout.png">
+	{% if request.shoelace.client_profile %}
+	    <img src="{{request.shoelace.client_profile.image_url}}" alt="" />
+	{% endif %}
 	</div>
 </div>
 {% endblock %}

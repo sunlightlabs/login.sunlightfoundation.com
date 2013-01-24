@@ -16,7 +16,7 @@ from urlparse import urlparse, parse_qs
 from shoelace.apps.oauth2.models import ClientProfile
 
 
-def login_shim(request, **kwargs):
+def insert_client(request):
     request.shoelace = {
         "client": None,
         "client_profile": None
@@ -39,6 +39,9 @@ def login_shim(request, **kwargs):
                 except Client.DoesNotExist:
                     pass
 
+
+def login_shim(request, **kwargs):
+    insert_client(request)
     return login_view(request, **kwargs)
 
 
@@ -131,6 +134,7 @@ def signup(request):
             else:
                 return redirect(request.POST['next'])
     else:
+        insert_client(request)
         form = SignupForm()
 
     return render_to_response(
