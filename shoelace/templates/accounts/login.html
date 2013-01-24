@@ -6,9 +6,6 @@
 {% block content %}
 <div class="span7">
 	<h2>Login</h2>
-	{% if request.shoelace.client_profile %}
-	    <img src="{{request.shoelace.client_profile.image_url}}" alt="" />
-	{% endif %}
 	<form method="POST" action="{% url 'login' %}?next={{next|urlencode}}" class="form-horizontal">
 	<input type="hidden" name="next" value="{{next}}">
 	{% include "accounts/_form.html" %}
@@ -22,7 +19,9 @@
 	</form>
 </div>
 <div class="span5 which-site">
-		<img src="http://static.openstates.org/assets/v2.1/images/logo.png">
+	{% if request.shoelace.client_profile %}
+	    <img src="{{request.shoelace.client_profile.image_url}}" alt="" />
+	{% endif %}
 </div>
 
 {% endblock %}

@@ -132,6 +132,6 @@ def signup(request):
     return render_to_response(
         'accounts/signup.html', {
             'form': form,
-            'next': request.GET.get('next')
+            'next': request.GET.get('next') or "/"
         }, RequestContext(request)
     )

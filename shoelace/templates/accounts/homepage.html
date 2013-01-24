@@ -4,13 +4,14 @@
 
 {% block content %}
 <div class="module clearfix">
-<h3 class="sectionHeader">Log in to one of our sites</h3s>
+<h3 class="sectionHeader">Sites that support central login:</h3s>
 <ul class="halfs">
 	<li class="clear which-site">
 		<div class="">
-			<img src="http://static.openstates.org/assets/v2.1/images/logo.png">
+            <a href="http://openstates.org/"><img src="http://static.openstates.org/assets/v2.1/images/logo.png"></a>
 		</div>
 	</li>
+    {% comment %}
 	<li class="last which-site">
 		<div class="">
 			<img src="https://scout.sunlightfoundation.com/images/logo_scout.png">
@@ -46,6 +47,7 @@
 			<img src="https://scout.sunlightfoundation.com/images/logo_scout.png">
 		</div>
 	</li>
+    {% endcomment %}
 </ul>
 </div>
 
