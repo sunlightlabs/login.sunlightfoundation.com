@@ -9,24 +9,10 @@
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
 {% endblock %}
 
+{% block title %}login.sunlightfoundation.com{% endblock %}
+
 {% block container %}
 	<div class="content">
-        <div class="navbar">
-	        <div class="navbar-inner">
-	            <div class="container">
-	                <a class="brand" href="/">shoelace</a>
-	                <ul class="nav">
-	                {% if user.is_authenticated %}
-	                    <li><a href="{% url profile %}">Profile</a></li>
-	                    <li><a href="{% url logout %}">Logout</a></li>
-	                {% else %}
-	                    <li><a href="/accounts/login">Login</a></li>
-	                {% endif %}
-	                {% block navbar %}{% endblock %}
-	                </ul>
-	            </div>
-	        </div>
-	    </div>
 	    <div class="container">
 	    	{% block content %}{% endblock %}
 	    </div>
