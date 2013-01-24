@@ -30,8 +30,12 @@ def login_shim(request, **kwargs):
                 try:
                     client = Client.objects.get(key=client_id)
                     request.shoelace['client'] = client
-                    client_profile = ClientProfile.objects.get(client=client)
-                    request.shoelace['client_profile'] = client_profile
+                    try:
+                        client_profile = ClientProfile.objects.get(
+                            client=client)
+                        request.shoelace['client_profile'] = client_profile
+                    except ClientProfile.DoesNotExist:
+                        pass
                 except Client.DoesNotExist:
                     pass
 
