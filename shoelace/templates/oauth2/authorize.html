@@ -3,14 +3,51 @@
 {% block title %}Auth{% endblock %}
 
 {% block content %}
-    <div class="hero-unit">
-        <h1>{{client.name}}</h1>
-        <p>{{client.description}}</p>
-        <p>
+<ul class="halfs">
+	<li class="clear which-site">
+		<div class="">
         {% if profile %}
             <img src="{{profile.image_url}}" alt="{{client.name}}" />
+        {% else %}
+            <h1>{{client.name}}</h1>
         {% endif %}
-        </p>
+		</div>
+	</li>
+	<li class="last which-site">
+		<div class="">
+            {{client.description}}
+		</div>
+	</li>
+	<li class="clear which-site">
+	</li>
+	<li class="last which-site">
+		<div class="">
+            Would you like to grant {{client.name}} access to your information?
+            <br /><br />
+            <form class="form-signin" method="post" action=".">
+                <button name="connect"
+                    value="No"
+                    class="btn"
+                    type="submit"
+                >No way</button>
+                <button
+                    name="connect"
+                    value="Yes"
+                    class="btn btn-sunlight"
+                    type="submit"
+                >Yup!</button>
+                {% csrf_token %}
+                {% for key, value in GET.items %}
+                    <input type="hidden" name="{{key}}" value="{{value}}" />
+                {% endfor %}
+                {% csrf_token %}
+            </form>
+		</div>
+	</li>
+</ul>
+
+<!--
+    <div class="hero-unit">
         <p><i>{{client.name}}</i> is requesting access to your data.
         Should I give it your deets?</p>
         <p>
@@ -21,24 +58,8 @@
         </ul>
         </p>
         <p>
-        <form class="form-signin" method="post" action=".">
-            <button name="connect"
-                value="No"
-                class="btn btn-danger"
-                type="submit"
-            >No way</button>
-            <button
-                name="connect"
-                value="Yes"
-                class="btn btn-primary"
-                type="submit"
-            >Yup!</button>
-            {% csrf_token %}
-            {% for key, value in GET.items %}
-                <input type = 'hidden' name = '{{key}}' value = '{{value}}' />
-            {% endfor %}
-            {% csrf_token %}
-        </form>
         </p>
     </div>
+-->
+
 {% endblock %}
