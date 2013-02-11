@@ -5,23 +5,26 @@
 
 {% block content %}
 <div class="span7">
-	<h2>Login</h2>
-	<form method="POST" action="{% url 'login' %}?next={{next|urlencode}}" class="form-horizontal">
-	<input type="hidden" name="next" value="{{next}}">
-	{% include "accounts/_form.html" %}
-	<div class="control-group">
-	    <div class="controls">
-	        <button type="submit" class="btn btn-sunlight">Login</button>
-	        <a href="{% url 'signup' %}?next={{next|urlencode}}" class="btn" >New Account</a>
-	        <a href="{% url 'password_reset' %}" class="btn" >Forgot Password?</a>
-	    </div>
-	</div>
-	</form>
+    <h2>Login</h2>
+    <form method="POST" action="{% url 'login' %}?next={{next|urlencode}}" class="form-horizontal">
+        <input type="hidden" name="next" value="{{next}}">
+        {% include "accounts/_form.html" %}
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn btn-sunlight">Login</button>
+                <a href="{% url 'signup' %}?next={{next|urlencode}}" class="btn" >New Account</a>
+                <a href="{% url 'password_reset' %}" class="btn" >Forgot Password?</a>
+            </div>
+        </div>
+    </form>
 </div>
+{% if request.shoelace.client_profile %}
 <div class="span5 which-site">
-	{% if request.shoelace.client_profile %}
-	    <img src="{{request.shoelace.client_profile.image_url}}" alt="" />
-	{% endif %}
+    <img src="{{request.shoelace.client_profile.image_url}}" alt="" />
+    <div class="">
+        {{request.shoelace.client_profile.login_text}}
+    </div>
 </div>
+{% endif %}
 
 {% endblock %}

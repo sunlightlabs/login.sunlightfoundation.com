@@ -5,22 +5,23 @@
 
 {% block content %}
 <div class="span7">
-	<h2>Sign Up</h2>
-	<form method="POST" action="{% url 'signup' %}?next={{next|urlencode}}" class="form-horizontal">
-	<input type="hidden" name="next" value="{{next}}">
-	{% include "accounts/_form.html" %}
-	<div class="control-group">
-	    <div class="controls">
-	        <button type="submit" class="btn">Sign Up</button>
-	    </div>
-	</div>
-	</form>
+    <h2>Sign Up</h2>
+    <form method="POST" action="{% url 'signup' %}?next={{next|urlencode}}" class="form-horizontal">
+        <input type="hidden" name="next" value="{{next}}">
+        {% include "accounts/_form.html" %}
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" class="btn">Sign Up</button>
+            </div>
+        </div>
+    </form>
 </div>
+{% if request.shoelace.client_profile %}
 <div class="span5 which-site">
-	<div class="">
-	{% if request.shoelace.client_profile %}
-	    <img src="{{request.shoelace.client_profile.image_url}}" alt="" />
-	{% endif %}
-	</div>
+    <img src="{{request.shoelace.client_profile.image_url}}" alt="" />
+    <div class="">
+        {{request.shoelace.client_profile.signup_text}}
+    </div>
 </div>
+{% endif %}
 {% endblock %}

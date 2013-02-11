@@ -57,9 +57,9 @@
         <td>{{token.issue|naturaltime}}</td>
         <td>{{token.expire|naturaltime}}</td>
         <td>
-{% for scope in token.scope.all %}
+            {% for scope in token.scope.all %}
             <span class="badge badge-info" >{{scope.key}}</span>
-{% endfor %}
+            {% endfor %}
         </td>
     </tr>
     {% endfor %}
