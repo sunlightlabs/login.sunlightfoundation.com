@@ -17,5 +17,6 @@ def userinfo(request):
         "first_name": authenticator.user.first_name,
         "last_name": authenticator.user.last_name,
         "is_staff": authenticator.user.is_staff,
-        "is_active": authenticator.user.is_active
+        "is_active": authenticator.user.is_active,
+        "is_superuser": authenticator.user.is_superuser
     })
