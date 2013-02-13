@@ -12,8 +12,14 @@
         <div class="control-group">
             <div class="controls">
                 <button type="submit" class="btn btn-sunlight">Login</button>
-                <a href="{% url 'signup' %}?next={{next|urlencode}}" class="btn" >New Account</a>
-                <a href="{% url 'password_reset' %}" class="btn" >Forgot Password?</a>
+                <ul class="or">
+	                <li>
+	                	Don't have an account yet? <a href="{% url 'signup' %}?next={{next|urlencode}}">Sign Up</a>
+	                </li>
+	                <li>
+	                	Forgot your password? <a href="{% url 'password_reset' %}">Retrieve it</a>
+	                </li>
+            	</ul>
             </div>
         </div>
     </form>

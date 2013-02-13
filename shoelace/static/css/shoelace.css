@@ -45,3 +45,10 @@ copyright {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 }
+.or{
+	float: right;
+	margin-right: 60px;
+}
+form .or li{
+	margin-bottom: -1px;
+}
