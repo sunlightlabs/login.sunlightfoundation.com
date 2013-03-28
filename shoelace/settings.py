@@ -84,6 +84,7 @@ INSTALLED_APPS = (
     'oauth2app',
     'django.contrib.admin',
     'storages',
+    'raven.contrib.django.raven_compat',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
