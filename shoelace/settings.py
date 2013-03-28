@@ -1,10 +1,7 @@
 import os
-from django.conf import settings
-
 
 SHOELACE_QUERY_AUTH_FIRST_LOGIN = False
 SHOELACE_QUERY_AUTH_ALWAYS = True
-
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -84,6 +81,7 @@ INSTALLED_APPS = (
     'oauth2app',
     'django.contrib.admin',
     'storages',
+    'sfapp',
     'raven.contrib.django.raven_compat',
 )
 

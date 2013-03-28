@@ -8,5 +8,6 @@ urlpatterns = patterns('',
     url(r'^api/', include('shoelace.apps.api.urls')),
     url(r'^accounts/', include('shoelace.apps.accounts.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'', include('sfapp.urls')),
     url(r'^$', 'shoelace.apps.accounts.views.homepage'),
 )

@@ -7,3 +7,5 @@ class ClientProfile(models.Model):
 
     template_slug = models.CharField(max_length=30)
     image_url = models.CharField(max_length=256)
+    signup_text = models.TextField()
+    login_text = models.TextField()

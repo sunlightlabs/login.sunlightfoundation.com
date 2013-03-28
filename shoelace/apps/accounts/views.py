@@ -10,13 +10,13 @@ from django.utils.http import urlquote
 from oauth2app.authorize import get_authorized_clients
 from oauth2app.models import Client, Code, AccessToken
 from shoelace.apps.accounts.forms import SignupForm
+from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.views import login as login_view
-from django.contrib.auth.views import logout as logout_view
 from urlparse import urlparse, parse_qs
 from shoelace.apps.oauth2.models import ClientProfile
 
 
-def login_shim(request, **kwargs):
+def insert_client(request):
     request.shoelace = {
         "client": None,
         "client_profile": None
@@ -30,21 +30,33 @@ def login_shim(request, **kwargs):
                 try:
                     client = Client.objects.get(key=client_id)
                     request.shoelace['client'] = client
-                    client_profile = ClientProfile.objects.get(client=client)
-                    request.shoelace['client_profile'] = client_profile
+                    try:
+                        client_profile = ClientProfile.objects.get(
+                            client=client)
+                        request.shoelace['client_profile'] = client_profile
+                    except ClientProfile.DoesNotExist:
+                        pass
                 except Client.DoesNotExist:
                     pass
 
+
+def login_shim(request, **kwargs):
+    insert_client(request)
     return login_view(request, **kwargs)
 
 
 def logout_shim(request, **kwargs):
-    meta = request.META
-    pop_back = "/"
-    if 'HTTP_REFERER' in meta:
-        pop_back = meta['HTTP_REFERER']
-    logout_view(request, **kwargs)
-    return redirect(pop_back)
+    """ log user out and redirect them to next (without domain check)
+        or to referring domain's root, or to own root """
+    auth_logout(request)
+    redirect_to = request.REQUEST.get('next', '')
+    if not redirect_to:
+        if 'HTTP_REFERER' in request.META:
+            pieces = urlparse.urlsplit(request.META['HTTP_REFERER'])
+            redirect_to = '%s://%s' % (pieces.scheme, pieces.netloc)
+        else:
+            redirect_to = '/'
+    return redirect(redirect_to)
 
 
 @login_required
@@ -122,11 +134,12 @@ def signup(request):
             else:
                 return redirect(request.POST['next'])
     else:
+        insert_client(request)
         form = SignupForm()
 
     return render_to_response(
         'accounts/signup.html', {
             'form': form,
-            'next': request.GET.get('next')
+            'next': request.GET.get('next') or "/"
         }, RequestContext(request)
     )

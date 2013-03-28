@@ -1,10 +1,58 @@
 {% extends "base.html" %}
 
-{% block title %}Shoelace{% endblock %}
-
 {% block content %}
+<div class="module clearfix">
+    <h3 class="sectionHeader">Welcome to login.sunlightfoundation.com</h3>
+    login.sunlightfoundation.com is for logging into Sunlight properties. If
+    you're interested in some of Sunlight's work, the following is a list of
+    Sunlight properties that support our central login method:
 
-Placeholder: this page should be a list of sites people can log in to with
-Sunlight Foundation Accounts.
+    <ul class="halfs">
+        <li class="clear which-site">
+            <div class="">
+                <a href="http://openstates.org/"><img src="http://static.openstates.org/assets/v2.1/images/logo.png"></a>
+            </div>
+        </li>
+        <li class="last which-site">
+        <div class="">
+            The OpenStates project is an effort to collect, normalize and
+            provide legislative information for all 50 states, DC and Puerto
+            Rico.
+        </div>
+        </li>
+        {% comment %}
+        <li class="clear which-site">
+        <div class="">
+            <img src="https://scout.sunlightfoundation.com/images/logo_scout.png">
+        </div>
+        </li>
+        <li class="last which-site">
+        <div class="">
+            <img src="http://static.openstates.org/assets/v2.1/images/logo.png">
+        </div>
+        </li>
+        <li class="clear which-site">
+        <div class="">
+            <img src="http://static.openstates.org/assets/v2.1/images/logo.png">
+        </div>
+        </li>
+        <li class="last which-site">
+        <div class="">
+            <img src="http://static.openstates.org/assets/v2.1/images/logo.png">
+        </div>
+        </li>
+        <li class="last which-site">
+        <div class="">
+            <img src="https://scout.sunlightfoundation.com/images/logo_scout.png">
+        </div>
+        </li>
+        <li class="last which-site">
+        <div class="">
+            <img src="https://scout.sunlightfoundation.com/images/logo_scout.png">
+        </div>
+        </li>
+        {% endcomment %}
+    </ul>
+</div>
 
 {% endblock %}

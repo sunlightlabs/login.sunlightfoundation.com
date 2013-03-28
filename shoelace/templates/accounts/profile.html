@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 {% load humanize %}
 
-
-{% block title %}profile{% endblock %}
-
 {% block content %}
 <h1>Hi, {{user.first_name}}!</h1>
 <p>It's a pleasure to meet you.</p>
@@ -60,9 +57,9 @@
         <td>{{token.issue|naturaltime}}</td>
         <td>{{token.expire|naturaltime}}</td>
         <td>
-{% for scope in token.scope.all %}
+            {% for scope in token.scope.all %}
             <span class="badge badge-info" >{{scope.key}}</span>
-{% endfor %}
+            {% endfor %}
         </td>
     </tr>
     {% endfor %}

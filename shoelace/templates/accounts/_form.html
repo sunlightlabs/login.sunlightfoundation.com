@@ -12,7 +12,11 @@
         {% endif %}
     </label>
     <div class="controls">
-        {{field}}
+        {% if field.label == 'Username' %}
+            <input id="id_username" type="text" name="username" maxlength="100" />
+        {% else %}
+            {{field}}
+        {% endif %}
         {% for error in field.errors %}
         <span class="help-inline">{{error}}</span>
         {% endfor %}

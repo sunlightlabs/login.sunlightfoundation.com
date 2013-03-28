@@ -1,6 +1,7 @@
 Django>=1.4
 -e git://github.com/paultag/oauth2app.git@develop#egg=oauth2app
 psycopg2
-django-storages
-boto
+django-storages==1.1.6
+boto==2.7.0
 raven
+-e git://github.com/sunlightlabs/sfapp.git#egg=sfapp
