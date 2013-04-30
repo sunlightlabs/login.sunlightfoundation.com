@@ -26,7 +26,9 @@
 </div>
 {% if request.shoelace.client_profile %}
 <div class="span5 which-site">
+{% if request.shoelace.client_profile.image_url %}
     <img src="{{request.shoelace.client_profile.image_url}}" alt="" />
+{% endif %}
     <div class="">
         {{request.shoelace.client_profile.login_text}}
     </div>

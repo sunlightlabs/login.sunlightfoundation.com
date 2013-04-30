@@ -6,6 +6,6 @@ class ClientProfile(models.Model):
     client = models.OneToOneField(Client)
 
     template_slug = models.CharField(max_length=30)
-    image_url = models.CharField(max_length=256)
+    image_url = models.CharField(max_length=256, blank=True)
     signup_text = models.TextField()
     login_text = models.TextField()
