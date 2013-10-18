@@ -125,7 +125,7 @@ def signup(request):
             u.save()
 
             # log the user in by default
-            new_user = authenticate(username=form.cleaned_data['email'],
+            new_user = authenticate(username=form.cleaned_data['email'][:30],
                                     password=form.cleaned_data['password'])
             login(request, new_user)
 

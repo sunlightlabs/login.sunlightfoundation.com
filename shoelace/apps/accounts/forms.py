@@ -14,7 +14,7 @@ class SignupForm(forms.Form):
 
     def clean_email(self):
         try:
-            User.objects.get(email=self.data['email'])
+            User.objects.get(email__iexact=self.data['email'])
         except User.DoesNotExist:
             return self.data['email']
         raise validators.ValidationError(
