@@ -13,8 +13,9 @@ class SignupForm(forms.Form):
                                 widget=PasswordInput())
 
     def clean_email(self):
+        email = self.data['email'].lower()
         try:
-            User.objects.get(email=self.data['email'])
+            User.objects.get(email=email)
         except User.DoesNotExist:
             return self.data['email']
         raise validators.ValidationError(
